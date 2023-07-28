@@ -1,0 +1,28 @@
+inherit_from:
+  - .rubocop_airbnb.yml
+
+Rails:
+  Enabled: true
+
+AllCops:
+  Exclude:
+  - 'bin/**/*'
+  - 'db/**/*'
+  - 'lib/**/*'
+  - 'node_modules/**/*'
+  - 'tmp/**/*'
+  - 'vendor/**/*'
+  - 'config/initializers/*'
+  - 'Gemfile'
+  
+Style/AsciiComments:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: no_comma
+
+Layout/LineLength:
+  Max: 150
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  EnforcedStyle: no_space

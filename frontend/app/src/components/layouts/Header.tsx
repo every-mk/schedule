@@ -38,7 +38,6 @@ const Header: React.FC = () => {
       const res = await signOut()
       console.log("サインアウト: " + res)
       if (res.data.success === true) {
-        // サインアウト時には各Cookieを削除
         Cookies.remove("_access_token")
         Cookies.remove("_client")
         Cookies.remove("_uid")
@@ -103,7 +102,8 @@ const Header: React.FC = () => {
             variant="h6"
             className={classes.title}
           >
-            Sample
+            ホーム
+            スケジュールとは
           </Typography>
           <AuthButtons />
         </Toolbar>
