@@ -23,5 +23,29 @@ module ScheduleApp
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # config.session_store :cookie_store, key: '_interslice_session'
+    # config.middleware.use ActionDispatch::Cookies
+    # config.middleware.use config.session_store, config.session_options
+
+    # config.session_store :cookie_store, key: '_interslice_session'
+    # config.middleware.use ActionDispatch::Cookies # Required for all session management
+    # config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
+    # config.middleware.use ActionDispatch::Flash
+
+    # 一時的にCSRF検証を行わない.
+    # config.action_controller.allow_forgery_protection = false
+
+    # クッキーを使用する.
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.use ActionDispatch::ContentSecurityPolicy::Middleware
+
+    config.generators do |g|
+      g.test_framework :rspec,
+        view_specs: false,
+        helper_specs: false,
+        routing_specs: false
+    end
   end
 end
