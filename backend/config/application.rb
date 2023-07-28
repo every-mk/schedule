@@ -33,6 +33,12 @@ module ScheduleApp
     # config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
     # config.middleware.use ActionDispatch::Flash
 
-    config.action_controller.forgery_protection_origin_check = false
+    # 一時的にCSRF検証を行わない.
+    # config.action_controller.allow_forgery_protection = false
+
+    # クッキーを使用する.
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.use ActionDispatch::ContentSecurityPolicy::Middleware
   end
 end
