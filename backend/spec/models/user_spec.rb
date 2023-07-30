@@ -14,11 +14,13 @@ RSpec.describe User, type: :model do
     end
 
     it "valid if name is 1 character" do
-      user = FactoryBot.create(:user, :one_char_name)
+      user = FactoryBot.build(:user, :one_char_name)
+      user.valid?
       expect(user).to be_valid
     end
     it "valid if name is 30 character" do
-      user = FactoryBot.create(:user, :thirty_char_name)
+      user = FactoryBot.build(:user, :thirty_char_name)
+      user.valid?
       expect(user).to be_valid
     end
     it "invalid if name is 31 character" do
