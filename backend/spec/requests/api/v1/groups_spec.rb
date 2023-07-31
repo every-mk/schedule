@@ -4,13 +4,13 @@ RSpec.describe "Api::V1::Groups", type: :request do
   describe "#create" do
     it "space, name and content are valid" do
       group = FactoryBot.build(:group)
-      expect {
+      expect do
         post api_v1_groups_path, params: {
           space: group.space,
           name: group.name,
           content: group.content
         }
-      }.to change(Group, :count).by(1)
+      end.to change(Group, :count).by(1)
       expect(response).to have_http_status(:success)
       json = JSON.parse(response.body)
       expect(json["status"]).to eq 200
@@ -138,7 +138,6 @@ RSpec.describe "Api::V1::Groups", type: :request do
     end
 
     it "data does not exist" do
-      new_group = FactoryBot.build(:group, :new_group)
       get api_v1_group_path(id: group.id + 1)
       expect(response).to have_http_status(:success)
       json = JSON.parse(response.body)
@@ -295,7 +294,7 @@ RSpec.describe "Api::V1::Groups", type: :request do
 
   describe "#destroy" do
     let!(:group) { FactoryBot.create(:group) }
-    
+
     it "data exists" do
       delete api_v1_group_path(id: group.id)
       expect(response).to have_http_status(:success)
@@ -308,7 +307,6 @@ RSpec.describe "Api::V1::Groups", type: :request do
     end
 
     it "data does not exist" do
-      new_group = FactoryBot.build(:group, :new_group)
       delete api_v1_group_path(id: group.id + 1)
       expect(response).to have_http_status(:success)
       json = JSON.parse(response.body)

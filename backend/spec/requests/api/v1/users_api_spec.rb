@@ -8,7 +8,7 @@ RSpec.describe "V1::UsersApis", type: :request do
       let!(:user) { FactoryBot.create(:user) }
 
       it "unique name and email are valid" do
-        expect {
+        expect do
           post api_v1_user_registration_path, params: {
             name: new_user.name,
             email: new_user.email,
@@ -16,12 +16,12 @@ RSpec.describe "V1::UsersApis", type: :request do
             password_confirmation: new_user.password,
             confirm_success_url: "http://localhost:3000/sign_in"
           }
-        }.to change(User, :count).by(1)
+        end.to change(User, :count).by(1)
         expect(response).to have_http_status(:success)
       end
 
       it "duplicate name is invalid" do
-        expect {
+        expect do
           post api_v1_user_registration_path, params: {
             name: user.name,
             email: new_user.email,
@@ -29,12 +29,12 @@ RSpec.describe "V1::UsersApis", type: :request do
             password_confirmation: new_user.password,
             confirm_success_url: "http://localhost:3000/sign_in"
           }
-        }.to change(User, :count).by(0)
+        end.to change(User, :count).by(0)
         expect(response).to have_http_status(422)
       end
 
       it "duplicate email is invalid" do
-        expect {
+        expect do
           post api_v1_user_registration_path, params: {
             name: new_user.name,
             email: user.email,
@@ -42,7 +42,7 @@ RSpec.describe "V1::UsersApis", type: :request do
             password_confirmation: new_user.password,
             confirm_success_url: "http://localhost:3000/sign_in"
           }
-        }.to change(User, :count).by(0)
+        end.to change(User, :count).by(0)
         expect(response).to have_http_status(422)
       end
     end
@@ -87,7 +87,7 @@ RSpec.describe "V1::UsersApis", type: :request do
 
     describe "#auth/update" do
       let!(:duplicate_user) { FactoryBot.create(:user, :new_user) }
-      
+
       it "update name" do
         user.name = "new name"
         put api_v1_user_registration_path, params: { name: user.name }, headers: token
@@ -98,9 +98,9 @@ RSpec.describe "V1::UsersApis", type: :request do
       end
 
       it "duplicate name is invalid" do
-        expect {
+        expect do
           put api_v1_user_registration_path, params: { name: duplicate_user.name }, headers: token
-        }.to change(User, :count).by(0)
+        end.to change(User, :count).by(0)
         expect(response).to have_http_status(422)
       end
 
@@ -114,9 +114,9 @@ RSpec.describe "V1::UsersApis", type: :request do
       end
 
       it "duplicate email is invalid" do
-        expect {
+        expect do
           put api_v1_user_registration_path, params: { email: duplicate_user.email }, headers: token
-        }.to change(User, :count).by(0)
+        end.to change(User, :count).by(0)
         expect(response).to have_http_status(422)
       end
 
@@ -129,9 +129,9 @@ RSpec.describe "V1::UsersApis", type: :request do
     describe "#auth/password/update" do
       it "password update" do
         new_password = "new_password"
-        expect {
+        expect do
           put api_v1_user_password_path, params: { password: new_password, password_confirmation: new_password }, headers: token
-        }.to change(User, :count).by(0)
+        end.to change(User, :count).by(0)
         expect(response).to have_http_status(:success)
         post api_v1_user_session_path, params: { email: user.email, password: user.password }
         expect(response).to have_http_status(401)
@@ -141,17 +141,17 @@ RSpec.describe "V1::UsersApis", type: :request do
 
       it "name is invalid" do
         user.name = "new name"
-        expect {
+        expect do
           put api_v1_user_password_path, params: { name: user.name }, headers: token
-        }.to change(User, :count).by(0)
+        end.to change(User, :count).by(0)
         expect(response).to have_http_status(422)
       end
 
       it "email is invalid" do
         user.email = "new@example.com"
-        expect {
+        expect do
           put api_v1_user_password_path, params: { email: user.email }, headers: token
-        }.to change(User, :count).by(0)
+        end.to change(User, :count).by(0)
         expect(response).to have_http_status(422)
       end
     end
