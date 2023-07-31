@@ -19,7 +19,7 @@ FactoryBot.define do
     end
 
     trait :one_char_name do
-      name { "1"}
+      name { "1" }
     end
 
     trait :twenty_char_name do
