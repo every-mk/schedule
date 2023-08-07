@@ -19,7 +19,7 @@ RSpec.describe "Api::V1::Groups", type: :request do
       expect(json["data"]["content"]).to eq group.content
     end
 
-    it "Can't create if space is empty" do
+    it "can't create if space is empty" do
       new_group = FactoryBot.build(:group, :space_is_blank)
       post api_v1_groups_path, params: {
         space: new_group.space,
@@ -32,7 +32,7 @@ RSpec.describe "Api::V1::Groups", type: :request do
       expect(json["message"]).to eq "データが不正です"
     end
 
-    it "Can't create if name is empty" do
+    it "can't create if name is empty" do
       new_group = FactoryBot.build(:group, :name_is_blank)
       post api_v1_groups_path, params: {
         space: new_group.space,
@@ -179,7 +179,7 @@ RSpec.describe "Api::V1::Groups", type: :request do
       expect(json["message"]).to eq "データが存在しません"
     end
 
-    it "Can't update if space is empty" do
+    it "can't update if space is empty" do
       new_group = FactoryBot.build(:group, :space_is_blank)
       put api_v1_group_path(id: group.id), params: {
         id: group.id,
@@ -193,7 +193,7 @@ RSpec.describe "Api::V1::Groups", type: :request do
       expect(json["message"]).to eq "データが不正です"
     end
 
-    it "Can't update if name is empty" do
+    it "can't update if name is empty" do
       new_group = FactoryBot.build(:group, :name_is_blank)
       put api_v1_group_path(id: group.id), params: {
         id: group.id,

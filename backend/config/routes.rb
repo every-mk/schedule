@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       end
 
       resources :groups, only: [:create, :show, :update, :destroy]
+      resources :permissions, only: [:create, :show, :update, :destroy]
     end
   end
 end
