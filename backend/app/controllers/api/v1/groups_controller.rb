@@ -21,7 +21,7 @@ class Api::V1::GroupsController < ApplicationController
   def update
     if Group.exists?(id: params[:id])
       group = Group.find(params[:id])
-      
+
       if group.update(group_params)
         render json: { status: 200, data: group }
       else

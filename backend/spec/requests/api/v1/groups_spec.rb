@@ -4,13 +4,13 @@ RSpec.describe "Api::V1::Groups", type: :request do
   describe "#create" do
     it "space, name and content are valid" do
       group = FactoryBot.build(:group)
-      expect {
+      expect do
         post api_v1_groups_path, params: {
           space: group.space,
           name: group.name,
           content: group.content
         }
-      }.to change(Group, :count).by(1)
+      end.to change(Group, :count).by(1)
       expect(response).to have_http_status(:success)
       json = JSON.parse(response.body)
       expect(json["status"]).to eq 200
@@ -19,7 +19,7 @@ RSpec.describe "Api::V1::Groups", type: :request do
       expect(json["data"]["content"]).to eq group.content
     end
 
-    it "Can't create if space is empty" do
+    it "can't create if space is empty" do
       new_group = FactoryBot.build(:group, :space_is_blank)
       post api_v1_groups_path, params: {
         space: new_group.space,
@@ -32,7 +32,7 @@ RSpec.describe "Api::V1::Groups", type: :request do
       expect(json["message"]).to eq "データが不正です"
     end
 
-    it "Can't create if name is empty" do
+    it "can't create if name is empty" do
       new_group = FactoryBot.build(:group, :name_is_blank)
       post api_v1_groups_path, params: {
         space: new_group.space,
@@ -138,7 +138,6 @@ RSpec.describe "Api::V1::Groups", type: :request do
     end
 
     it "data does not exist" do
-      new_group = FactoryBot.build(:group, :new_group)
       get api_v1_group_path(id: group.id + 1)
       expect(response).to have_http_status(:success)
       json = JSON.parse(response.body)
@@ -180,7 +179,7 @@ RSpec.describe "Api::V1::Groups", type: :request do
       expect(json["message"]).to eq "データが存在しません"
     end
 
-    it "Can't update if space is empty" do
+    it "can't update if space is empty" do
       new_group = FactoryBot.build(:group, :space_is_blank)
       put api_v1_group_path(id: group.id), params: {
         id: group.id,
@@ -194,7 +193,7 @@ RSpec.describe "Api::V1::Groups", type: :request do
       expect(json["message"]).to eq "データが不正です"
     end
 
-    it "Can't update if name is empty" do
+    it "can't update if name is empty" do
       new_group = FactoryBot.build(:group, :name_is_blank)
       put api_v1_group_path(id: group.id), params: {
         id: group.id,
@@ -295,7 +294,7 @@ RSpec.describe "Api::V1::Groups", type: :request do
 
   describe "#destroy" do
     let!(:group) { FactoryBot.create(:group) }
-    
+
     it "data exists" do
       delete api_v1_group_path(id: group.id)
       expect(response).to have_http_status(:success)
@@ -308,7 +307,6 @@ RSpec.describe "Api::V1::Groups", type: :request do
     end
 
     it "data does not exist" do
-      new_group = FactoryBot.build(:group, :new_group)
       delete api_v1_group_path(id: group.id + 1)
       expect(response).to have_http_status(:success)
       json = JSON.parse(response.body)
