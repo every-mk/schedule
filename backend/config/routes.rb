@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
       resources :groups, only: [:create, :show, :update, :destroy]
       resources :permissions, only: [:create, :show, :update, :destroy]
+      resources :posts, only: [:create, :show, :update, :destroy]
     end
   end
 end
