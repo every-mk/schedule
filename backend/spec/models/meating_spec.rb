@@ -56,7 +56,7 @@ RSpec.describe Meating, type: :model do
       meating.valid?
       expect(meating.errors[:priority]).to include("is not included in the list")
     end
-    
+
     it "valid if priority is 1" do
       meating = FactoryBot.build(:meating, group: group)
       meating.valid?
