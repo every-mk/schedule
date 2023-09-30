@@ -19,19 +19,19 @@ RSpec.describe Group, type: :model do
       expect(group.errors[:name]).to include("can't be blank")
     end
 
-    it "valid if name is 1 charcter" do
+    it "valid if name is 1 character" do
       group = FactoryBot.build(:group, :one_char_name)
       group.valid?
       expect(group).to be_valid
     end
 
-    it "valid if name is 20 charcter" do
+    it "valid if name is 20 character" do
       group = FactoryBot.build(:group, :twenty_char_name)
       group.valid?
       expect(group).to be_valid
     end
 
-    it "invalid if name is 21 charcter" do
+    it "invalid if name is 21 character" do
       group = FactoryBot.build(:group, :twenty_one_char_name)
       group.valid?
       expect(group.errors[:name]).to include("is too long (maximum is 20 characters)")
@@ -96,19 +96,19 @@ RSpec.describe Group, type: :model do
       expect(group).to be_valid
     end
 
-    it "valid if name is 1 charcter" do
+    it "valid if name is 1 character" do
       group.name = FactoryBot.build(:group, :one_char_name).name
       group.valid?
       expect(group).to be_valid
     end
 
-    it "valid if name is 20 charcter" do
+    it "valid if name is 20 character" do
       group.name = FactoryBot.build(:group, :twenty_char_name).name
       group.valid?
       expect(group).to be_valid
     end
 
-    it "invalid if name is 21 charcter" do
+    it "invalid if name is 21 character" do
       group.name = FactoryBot.build(:group, :twenty_one_char_name).name
       group.valid?
       expect(group.errors[:name]).to include("is too long (maximum is 20 characters)")
