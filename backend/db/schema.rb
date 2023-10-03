@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_24_083905) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_30_093543) do
   create_table "groups", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "space", null: false
     t.string "name", limit: 20, null: false
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "invites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "meating_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "kind", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meating_id"], name: "index_invites_on_meating_id"
+    t.index ["user_id"], name: "index_invites_on_user_id"
   end
 
   create_table "meatings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
