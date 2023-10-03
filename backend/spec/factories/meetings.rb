@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :meating do
+  factory :meeting do
     name { "test name" }
     priority { 1 }
     start_at { "2023-09-26 10:00:00" }
@@ -7,7 +7,7 @@ FactoryBot.define do
     notice_period { true }
     content { "test content" }
 
-    trait :new_meating do
+    trait :new_meeting do
       name { "new name" }
       priority { 2 }
       start_at { "2023-09-27 12:00:00" }

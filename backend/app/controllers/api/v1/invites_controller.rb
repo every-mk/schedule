@@ -45,6 +45,6 @@ class Api::V1::InvitesController < ApplicationController
   private
 
   def invite_params
-    params.permit(:invite_id, :meating_id, :user_id, :kind)
+    params.permit(:invite_id, :meeting_id, :user_id, :kind)
   end
 end

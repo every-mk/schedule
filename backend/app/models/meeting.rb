@@ -1,4 +1,4 @@
-class Meating < ApplicationRecord
+class Meeting < ApplicationRecord
   belongs_to :group
   has_many :invites, dependent: :destroy
   has_many :users, through: :invites
