@@ -1,6 +1,6 @@
-class CreateMeatings < ActiveRecord::Migration[7.0]
+class CreateMeetings < ActiveRecord::Migration[7.0]
   def change
-    create_table :meatings do |t|
+    create_table :meetings do |t|
       t.belongs_to :group, null: false
       t.string :name, limit: 20, null: false
       t.integer :priority, null: false

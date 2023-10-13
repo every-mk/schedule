@@ -1,6 +1,6 @@
 class Group < ApplicationRecord
   has_many :permissions, dependent: :destroy
-  has_many :meatings, dependent: :destroy
+  has_many :meetings, dependent: :destroy
   has_many :users, through: :permissions
   has_many :users, through: :posts
   validates :space, presence: true
