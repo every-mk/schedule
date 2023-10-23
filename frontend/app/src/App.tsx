@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 
 // import { LoginUserContext } from "./providers/LoginUserProvider";
 // import { SignUpButton } from "./components/SignUpButton";
+import { HeaderLayout } from "./components/templates/HeaderLayout";
 import { Router } from "./router/Router";
 
 export const App: FC = () => {
@@ -23,7 +24,9 @@ export const App: FC = () => {
 
   return (
     <BrowserRouter>
-      <Router />
+      <HeaderLayout>
+        <Router />
+      </HeaderLayout>
     </BrowserRouter>
   );
 };

@@ -4,7 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import { Login } from "../components/pages/Login";
 import { homeRoutes } from "./HomeRoutes"
 import { Page404 } from "../components/pages/Page404";
-import { HeaderLayout } from "../components/templates/HeaderLayout";
 
 export const Router: FC = memo(() => {
   return (
@@ -13,8 +12,8 @@ export const Router: FC = memo(() => {
       <Route path="/home">
         {homeRoutes.map((route, index) => (
           index === 0
-            ? <Route index element={<HeaderLayout>{route.children}</HeaderLayout>} />
-            : <Route path={route.path} element={<HeaderLayout>{route.children}</HeaderLayout>} /> 
+            ? <Route index element={route.children} />
+            : <Route path={route.path} element={route.children} /> 
         ))}
       </Route>
       <Route path="*" element={<Page404 />} />

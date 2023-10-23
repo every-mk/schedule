@@ -1,7 +1,10 @@
 import { memo, FC } from "react";
 import styled from "styled-components";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { DrawerCloseButton, Button, Drawer, DrawerOverlay, DrawerContent, DrawerBody, useDisclosure, IconButton } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
+
+import { ActiveWhiteColor, WhiteColor, HeaderHeight } from "./GlobalStyle";
+import { MenuIconButton } from "../atoms/button/MenuIconButton";
+import { MenuDrawer } from "../../molecules/MenuDrawer";
 
 export const Header: FC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -18,43 +21,22 @@ export const Header: FC = memo(() => {
           <SLogInButton>ログイン</SLogInButton>
         </SFlexItemRight>
         <SFlexItemRight>
-          <HamburgerButton onClick={onOpen}>
-            <GiHamburgerMenu />
-          </HamburgerButton>
-          
+          <MenuIconButton onOpen={onOpen} />
         </SFlexItemRight>
       </SFlexBox>
-
-      <Button aria-label="メニュー" size="sm" variant="unstyled" display={{ base: "block", md: "none" }} onClick={onOpen} />
-      
-      <Drawer placement="top" size="md" onClose={onClose} isOpen={isOpen}>
-        <DrawerOverlay />
-        <DrawerContent>
-        <DrawerCloseButton />
-          <DrawerBody>
-            <Button>TOP</Button>
-            <Button>ユーザー一覧</Button>
-            <Button>設定</Button>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <MenuDrawer onClose={onClose} isOpen={isOpen} />
     </SHeader>
   );
 });
 
-const Height = "60px";
 const FontSize = "18px";
-const Color = "#fff";
-const ActiveColor = "#ddd";
-
-// ハンバーガーアイコン追加 react-icons
 
 const SHeader = styled.header`
   padding: 5px 0;
-  height: ${ Height };
+  height: ${ HeaderHeight };
   background-color: #0033ff;
   font-size: ${ FontSize };
-  color: ${ Color };
+  color: ${ WhiteColor };
 `
 
 const SFlexBox = styled.div`
@@ -64,14 +46,14 @@ const SFlexBox = styled.div`
 
 const SFlexItem = styled.div`
   text-align: center;
-  line-height: ${ Height };
+  line-height: ${ HeaderHeight };
 
   &:hover{
     cursor: pointer;
   }
 
   &:active {
-    color: ${ ActiveColor };
+    color: ${ ActiveWhiteColor };
   }
 `
 
@@ -97,7 +79,7 @@ const SFlexRightItem = styled.div`
   margin-right: 10px;
   padding: 0 10px;
   text-align: center;
-  line-height: ${ Height };
+  line-height: ${ HeaderHeight };
   font-size: ${ FontSize };
 
   &:hover {
@@ -105,7 +87,7 @@ const SFlexRightItem = styled.div`
   }
 
   &:active {
-    color: ${ ActiveColor };
+    color: ${ ActiveWhiteColor };
   }
 `
 
@@ -113,17 +95,17 @@ const SButton = styled.button`
   margin-right: 10px;
   padding: 0 10px;
   text-align: center;
-  line-height: ${ Height };
+  line-height: ${ HeaderHeight };
   font-size: ${ FontSize };
-  color: ${ Color };
-  border-radius: 30px;
+  color: ${ WhiteColor };
+  border-radius: 20px;
 
   &:hover {
     cursor: pointer;
   }
 
   &:active {
-    color: ${ ActiveColor };
+    color: ${ ActiveWhiteColor };
   }
 `
 
@@ -156,10 +138,14 @@ const SLogInButton = styled(SButton)`
 const HamburgerButton = styled.div`
   margin-right: 10px;
   padding-top: 5px;
-  line-height: ${ Height };
+  line-height: ${ HeaderHeight };
   font-size: 2em;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   &:active {
-    color: ${ ActiveColor };
+    color: ${ ActiveWhiteColor };
   }
 `
