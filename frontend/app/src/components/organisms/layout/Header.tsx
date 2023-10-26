@@ -1,30 +1,48 @@
-import { memo, FC } from "react";
+import { memo, FC, useCallback } from "react";
 import styled from "styled-components";
 import { useDisclosure } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 import { ActiveWhiteColor, WhiteColor, HeaderHeight } from "./GlobalStyle";
 import { MenuIconButton } from "../atoms/button/MenuIconButton";
 import { MenuDrawer } from "../../molecules/MenuDrawer";
+import { useLoginUser } from "../../../hooks/useLoginUser";
+import { useAuth } from "../../../hooks/useAuth";
 
 export const Header: FC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+
+  const onClickHome = useCallback(() => navigate("/home"), []);
+  const onClickUserManagement = useCallback(() => navigate("/home/user_management"), []);
+  const onClickLogin = useCallback(() => navigate("/login"), []);
+  const { loginUser } = useLoginUser();
+  const { logout } = useAuth();
 
   return (
     <SHeader>
       <SFlexBox>
-        <SFlexItem>
+        <SFlexItem onClick={onClickHome}>
           スケジュールアプリ
         </SFlexItem>
         <SFlexItemRight>
-          <SFlexRightItem>設定</SFlexRightItem>
-          <SSignUpButton>新規登録</SSignUpButton>
-          <SLogInButton>ログイン</SLogInButton>
+          {
+             loginUser === null
+              ? <>
+                  <SSignUpButton>新規登録</SSignUpButton>
+                  <SLogInButton onClick={onClickLogin}>ログイン</SLogInButton>
+                </>
+              : <>
+                  <SFlexRightItem onClick={onClickUserManagement}>設定</SFlexRightItem>
+                  <SLogInButton onClick={logout}>ログアウト</SLogInButton>
+                </>
+          }
         </SFlexItemRight>
         <SFlexItemRight>
           <MenuIconButton onOpen={onOpen} />
         </SFlexItemRight>
       </SFlexBox>
-      <MenuDrawer onClose={onClose} isOpen={isOpen} />
+      <MenuDrawer onClose={onClose} isOpen={isOpen} onClickHome={onClickHome} onClickUserManagement={onClickUserManagement} onClickLogin={onClickLogin} />
     </SHeader>
   );
 });
@@ -98,7 +116,7 @@ const SButton = styled.button`
   line-height: ${ HeaderHeight };
   font-size: ${ FontSize };
   color: ${ WhiteColor };
-  border-radius: 20px;
+  border-radius: 5px;
 
   &:hover {
     cursor: pointer;
@@ -132,20 +150,5 @@ const SLogInButton = styled(SButton)`
 
   &:active {
     background-color: #0099ff;
-  }
-`
-
-const HamburgerButton = styled.div`
-  margin-right: 10px;
-  padding-top: 5px;
-  line-height: ${ HeaderHeight };
-  font-size: 2em;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:active {
-    color: ${ ActiveWhiteColor };
   }
 `

@@ -10,4 +10,4 @@ export const homeRoutes = [
     path: "user_management",
     children: <UserManagement />
   },
-]
+];

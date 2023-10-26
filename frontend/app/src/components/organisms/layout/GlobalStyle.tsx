@@ -13,9 +13,10 @@ const Style = createGlobalStyle`
     margin: 0;
     padding: 0;
     color: #333;
+    background-color: #eee;
   }
 
-  header, footer, div, ul, li {
+  header, footer, div, ul, li, h1 {
     margin: 0;
     padding: 0;
   }
