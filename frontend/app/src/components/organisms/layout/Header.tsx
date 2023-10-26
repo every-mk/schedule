@@ -15,6 +15,7 @@ export const Header: FC = memo(() => {
 
   const onClickHome = useCallback(() => navigate("/home"), []);
   const onClickUserManagement = useCallback(() => navigate("/home/user_management"), []);
+  const onClickSignup = useCallback(() => navigate("/register"), []);
   const onClickLogin = useCallback(() => navigate("/login"), []);
   const { loginUser } = useLoginUser();
   const { logout } = useAuth();
@@ -29,7 +30,7 @@ export const Header: FC = memo(() => {
           {
              loginUser === null
               ? <>
-                  <SSignUpButton>新規登録</SSignUpButton>
+                  <SSignUpButton onClick={onClickSignup}>新規登録</SSignUpButton>
                   <SLogInButton onClick={onClickLogin}>ログイン</SLogInButton>
                 </>
               : <>
@@ -42,7 +43,7 @@ export const Header: FC = memo(() => {
           <MenuIconButton onOpen={onOpen} />
         </SFlexItemRight>
       </SFlexBox>
-      <MenuDrawer onClose={onClose} isOpen={isOpen} onClickHome={onClickHome} onClickUserManagement={onClickUserManagement} onClickLogin={onClickLogin} />
+      <MenuDrawer onClose={onClose} isOpen={isOpen} onClickHome={onClickHome} onClickUserManagement={onClickUserManagement} onClickSignup={onClickSignup} onClickLogin={onClickLogin} />
     </SHeader>
   );
 });

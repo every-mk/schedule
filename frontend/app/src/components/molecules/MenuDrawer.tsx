@@ -9,11 +9,12 @@ type Props = {
   isOpen: boolean;
   onClickHome: () => void;
   onClickUserManagement: () => void;
+  onClickSignup: () => void;
   onClickLogin: () => void;
 };
 
 export const MenuDrawer: FC<Props> = memo((props) => {
-  const { onClose, isOpen, onClickHome, onClickUserManagement, onClickLogin } = props;
+  const { onClose, isOpen, onClickHome, onClickUserManagement, onClickSignup, onClickLogin } = props;
   const { loginUser } = useLoginUser();
   const { logout } = useAuth();
 
@@ -27,7 +28,7 @@ export const MenuDrawer: FC<Props> = memo((props) => {
           {
             loginUser === null
               ? <>
-                  <Button>新規登録</Button>
+                  <Button onClick={onClickSignup}>新規登録</Button>
                   <Button onClick={onClickLogin}>ログイン</Button>
                 </>
               : <>
