@@ -9,7 +9,7 @@ import { useBaseAuth } from "./useBaseAuth";
 export const useAuth = () => {
   const navigate = useNavigate();
   const { setLoginUser } = useLoginUser();
-  const { auth, setAuth } = useBaseAuth();
+  const { config, setAuth } = useBaseAuth();
 
   const login = useCallback((email: string, password: string) => {
     axios.post("http://localhost:3001/api/v1/auth/sign_in",
@@ -36,15 +36,7 @@ export const useAuth = () => {
   }, [navigate]);
 
   const logout = useCallback(() => {
-    axios.delete("http://localhost:3001/api/v1/auth/sign_out",
-    {
-      headers: {
-        contentType: "application/json",
-        ["access-token"]: auth?.["access-token"],
-        client: auth?.client,
-        uid: auth?.uid
-      }
-    })
+    axios.delete("http://localhost:3001/api/v1/auth/sign_out", config)
     .catch(() => {});
     setAuth(null);
     setLoginUser(null);
