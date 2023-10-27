@@ -32,7 +32,7 @@ export const MenuDrawer: FC<Props> = memo((props) => {
                   <Button onClick={onClickLogin}>ログイン</Button>
                 </>
               : <>
-                  <Button onClick={onClickUserManagement}>設定</Button>
+                  <Button onClick={onClickUserManagement}>ユーザー設定</Button>
                   <Button onClick={logout}>ログアウト</Button>
                 </>
           }

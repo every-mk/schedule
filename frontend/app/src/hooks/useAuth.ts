@@ -33,10 +33,10 @@ export const useAuth = () => {
   const login = useCallback((email: string, password: string) => {
     axios.post("http://localhost:3001/api/v1/auth/sign_in",
     {  
-      email: email,
-      password: password
-      // email: "vcvc5525@yahoo.co.jp",
-      // password: "password",
+      // email: email,
+      // password: password
+      email: "vcvc5525@yahoo.co.jp",
+      password: "password",
     },
     {
       headers: {

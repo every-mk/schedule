@@ -14,7 +14,7 @@ export const Header: FC = memo(() => {
   const navigate = useNavigate();
 
   const onClickHome = useCallback(() => navigate("/home"), []);
-  const onClickUserManagement = useCallback(() => navigate("/home/user_management"), []);
+  const onClickUserManagement = useCallback(() => navigate("/account"), []);
   const onClickSignup = useCallback(() => navigate("/register"), []);
   const onClickLogin = useCallback(() => navigate("/login"), []);
   const { loginUser } = useLoginUser();
@@ -34,7 +34,7 @@ export const Header: FC = memo(() => {
                   <SLogInButton onClick={onClickLogin}>ログイン</SLogInButton>
                 </>
               : <>
-                  <SFlexRightItem onClick={onClickUserManagement}>設定</SFlexRightItem>
+                  <SFlexRightItem onClick={onClickUserManagement}>ユーザー設定</SFlexRightItem>
                   <SLogInButton onClick={logout}>ログアウト</SLogInButton>
                 </>
           }
