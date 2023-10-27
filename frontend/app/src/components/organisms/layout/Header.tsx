@@ -79,7 +79,6 @@ const SFlexItem = styled.div`
 const SFlexItemRight = styled.div`
   display: flex;
   margin-left: auto;
-  // display: none;
 
   @media(max-width: 480px) {
     display: none;

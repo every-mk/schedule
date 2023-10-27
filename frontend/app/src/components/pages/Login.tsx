@@ -17,7 +17,7 @@ export const Login: FC = memo(() => {
   return (
     <SContainer>
       <SFlexBox>
-      <STitle>ログイン</STitle>
+        <STitle>ログイン</STitle>
         <SFlexItem>
           <SLabel>メールアドレス</SLabel>
           <SInputItem>
@@ -61,7 +61,6 @@ const STitle = styled.h1`
 const SLabel = styled.label`
   display: block;
   text-align: left;
-
 `
 
 const SInputItem = styled.div`
